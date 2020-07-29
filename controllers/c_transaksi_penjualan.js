@@ -92,7 +92,7 @@ exports.post = (req, res) => {
         else{
             dataDetail.forEach(function(data){
                 let sqlQueryDetail = `INSERT INTO ${tableDetailName} SET ?`;
-                executeDetail = conn.query(sqlQueryDetail, dataDetail, (errDtl, resQueryDetail)=>{
+                executeDetail = conn.query(sqlQueryDetail, data, (errDtl, resQueryDetail)=>{
                     
                 });
             });
