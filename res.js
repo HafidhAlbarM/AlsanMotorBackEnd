@@ -1,7 +1,8 @@
-exports.ok = (values, res)=>{
+exports.ok = (data, message, res)=>{
   var data = {
       'status': 200,
-      'data': (values) ? values : {}
+      'data': (data) ? data : {},
+      'message': (message) ? message : ''
   };
   res.json(data);
   res.end();

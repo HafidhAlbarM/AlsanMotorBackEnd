@@ -13,7 +13,7 @@ exports.get = (req, res) => {
                 info: err
             });
         } else{
-            response.ok(resQuery, res)
+            response.ok(resQuery, '', res)
         }
     });
 };
@@ -30,7 +30,7 @@ exports.getOne = (req, res) => {
                 info: err
             });
         } else{
-            response.ok(json[0], res)
+            response.ok(json[0], '', res)
         }
     });
 }
@@ -54,7 +54,7 @@ exports.post = (req, res) => {
             });
         }
         else{
-            response.ok(resQuery, res)
+            response.ok(resQuery, 'data telah tersimpan', res)
         }    
     });
 }
@@ -78,7 +78,7 @@ exports.put = (req, res) => {
             })
         }
         else{
-            response.ok(resQuery, res)
+            response.ok(resQuery, 'Data telah tersimpan', res)
         }
     });
 }
@@ -95,7 +95,7 @@ exports.delete = (req, res) => {
             })
         }
         else{
-            response.ok(resQuery, res)
+            response.ok(resQuery, 'Data telah terhapus', res)
         }
     });
 }

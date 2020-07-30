@@ -1,3 +1,7 @@
+PERUBAHAN DATABASE :
+- penjualan_h(status, sumber)
+
+
 {
 	"kode_penjualan": "PJ28072020004",
 	"kode_karyawan":  "KR25092018001",
@@ -5,7 +9,8 @@
 	"tanggal_penjualan": "2020-07-28",
 	"total_qty": 2,
 	"total": 28000,
-	"status":"LUNAS",
+	"status":"BELUM LUNAS",
+	"sumber":"ANDROID"
 	"transaksi_penjualan_detail":[
 		{
 			"kode_penjualan": "PJ28072020004",
@@ -22,4 +27,14 @@
             "sub_total": 20000
 		}
 	]
+}
+
+
+{
+	"plat_nomor": "B8872KG",
+	"merk_mobil": "Toyota",
+	"nama_mobil": "Camry",
+	"pemilik": "Ibnu Sina",
+	"jenis": "Langganan",
+	"jumlah_cuci": 0
 }
