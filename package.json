@@ -1,7 +1,6 @@
 {
   "name": "alsanmotorbackend",
   "version": "1.0.0",
-  "description": "",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,5 +12,14 @@
     "express": "^4.17.1",
     "md5": "^2.2.1",
     "mysql": "^2.18.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HafidhAlbarM/AlsanMotorBackEnd.git"
+  },
+  "bugs": {
+    "url": "https://github.com/HafidhAlbarM/AlsanMotorBackEnd/issues"
+  },
+  "homepage": "https://github.com/HafidhAlbarM/AlsanMotorBackEnd#readme",
+  "description": ""
 }

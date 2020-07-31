@@ -1,6 +1,5 @@
-const conn = require('../conn');
-const response = require('../res');
-const md5 = require('md5');
+const conn = require('../config/conn');
+const response = require('../config/res');
 
 const tableName = "penjualan_h";
 const tableDetailName = "penjualan_d";
@@ -9,19 +8,19 @@ const tableDetailName = "penjualan_d";
 //HEADER
 
 //READ (SELECT)
-exports.get = (req, res) => {
-    let sqlQuery = `SELECT * FROM ${tableName}`;
+// exports.get = (req, res) => {
+//     let sqlQuery = `SELECT * FROM ${tableName}`;
 
-    conn.query(sqlQuery, (err, resQuery) => {
-        if(err){
-            res.send({
-                info: err
-            });
-        } else{
-            response.ok(resQuery, '', res)
-        }
-    });
-};
+//     conn.query(sqlQuery, (err, resQuery) => {
+//         if(err){
+//             res.send({
+//                 info: err
+//             });
+//         } else{
+//             response.ok(resQuery, '', res)
+//         }
+//     });
+// };
 
 exports.getOne = (req, res) => {
     const kodePenjualan = req.params.kode_penjualan;
@@ -42,7 +41,6 @@ exports.getOne = (req, res) => {
 
 //CREATE (INSERT)
 exports.post = (req, res) => {
-    // console.log(req.body);
     let dataHeader = {
         "kode_penjualan": req.body.kode_penjualan,
         "kode_karyawan": req.body.kode_karyawan,
@@ -81,83 +79,83 @@ exports.post = (req, res) => {
 }
 
 //UPDATE
-exports.put = (req, res) => {
-    const kodePenjualan = req.params.kode_penjualan
-    let data = {
-        "kode_karyawan": req.body.kode_karyawan,
-        "plat_nomor": req.body.plat_nomor,
-        "tanggal_penjualan": req.body.tanggal_penjualan,
-        "total_qty": req.body.total_qty,
-        "total": req.body.total,
-        "status": req.body.status,
-        "sumber": req.body.sumber
-    }
+// exports.put = (req, res) => {
+//     const kodePenjualan = req.params.kode_penjualan
+//     let data = {
+//         "kode_karyawan": req.body.kode_karyawan,
+//         "plat_nomor": req.body.plat_nomor,
+//         "tanggal_penjualan": req.body.tanggal_penjualan,
+//         "total_qty": req.body.total_qty,
+//         "total": req.body.total,
+//         "status": req.body.status,
+//         "sumber": req.body.sumber
+//     }
 
-    let sqlQuery = `UPDATE ${tableName} SET ? WHERE kode_penjualan = '${kodePenjualan}'`;
-    conn.query(sqlQuery, data, (err,resQuery)=>{
-        if (err){
-            res.send({
-                info:err
-            })
-        }
-        else{
-            response.ok(resQuery, 'Data telah tersimpan', res)
-        }
-    });
-}
+//     let sqlQuery = `UPDATE ${tableName} SET ? WHERE kode_penjualan = '${kodePenjualan}'`;
+//     conn.query(sqlQuery, data, (err,resQuery)=>{
+//         if (err){
+//             res.send({
+//                 info:err
+//             })
+//         }
+//         else{
+//             response.ok(resQuery, 'Data telah tersimpan', res)
+//         }
+//     });
+// }
 
 //DELETE
-exports.delete = (req, res) => {
-    const kodePenjualan = req.params.kode_penjualan;
-    let sqlQuery = `DELETE FROM ${tableName} WHERE kode_penjualan = '${kodePenjualan}'`;
+// exports.delete = (req, res) => {
+//     const kodePenjualan = req.params.kode_penjualan;
+//     let sqlQuery = `DELETE FROM ${tableName} WHERE kode_penjualan = '${kodePenjualan}'`;
     
-    conn.query(sqlQuery, (err,resQuery)=>{
-        if (err){
-            res.send({
-                info:err
-            })
-        }
-        else{
-            response.ok(resQuery, 'Data telah terhapus', res)
-        }
-    });
-}
+//     conn.query(sqlQuery, (err,resQuery)=>{
+//         if (err){
+//             res.send({
+//                 info:err
+//             })
+//         }
+//         else{
+//             response.ok(resQuery, 'Data telah terhapus', res)
+//         }
+//     });
+// }
 
 
 
 //DETAIL
 
-// READ (SELECT)
-// exports.getDetail = (req, res) => {
-//     let sqlQuery = `SELECT * FROM ${tableDetailName}`;
+READ (SELECT)
+exports.getDetail = (req, res) => {
+    let sqlQuery = `SELECT * FROM ${tableDetailName}`;
 
-//     conn.query(sqlQuery, (err, resQuery) => {
-//         if(err){
-//             res.send({
-//                 info: err
-//             });
-//         } else{
-//             response.ok(resQuery, 'Data telah terhapus', res)
-//         }
-//     });
-// };
+    conn.query(sqlQuery, (err, resQuery) => {
+        if(err){
+            res.send({
+                info: err
+            });
+        } else{
+            response.ok(resQuery, 'Data telah terhapus', res)
+        }
+    });
+};
 
-// exports.getOneDetail = (req, res) => {
-//     const kodePenjualan = req.params.kode_penjualan;
-//     let sqlQuery = `SELECT * FROM ${tableDetailName} WHERE kode_penjualan='${kodePenjualan}'`;
+exports.getOneDetail = (req, res) => {
+    const kodePenjualan = req.params.kode_penjualan;
+    let sqlQuery = `SELECT * FROM ${tableDetailName} WHERE kode_penjualan='${kodePenjualan}'`;
 
-    // conn.query(sqlQuery, (err, resQuery) => {
-    //     var string=JSON.stringify(resQuery);
-    //     var json =  JSON.parse(string);
-    //     if(err){
-    //         res.send({
-    //             info: err
-    //         });
-    //     } else{
-    //         response.ok(json[0], '', res)
-    //     }
-    // });
-// }
+    conn.query(sqlQuery, (err, resQuery) => {
+        var string=JSON.stringify(resQuery);
+        var json =  JSON.parse(string);
+        if(err){
+            res.send({
+                info: err
+            });
+        } else{
+            response.ok(json[0], '', res)
+        }
+    });
+}
 
 //INSERT
 // exports.postDetail = (req, res) => {

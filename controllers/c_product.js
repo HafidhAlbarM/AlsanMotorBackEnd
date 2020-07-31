@@ -1,5 +1,5 @@
-const conn = require('../conn');
-const response = require('../res');
+const conn = require('../config/conn');
+const response = require('../config/res');
 const md5 = require('md5');
 
 const tableName = "product";
@@ -7,90 +7,41 @@ const tableName = "product";
 //READ (SELECT)
 exports.get = (req, res) => {
     let sqlQuery = `SELECT * FROM ${tableName}`;
+    let data = {
+        message: "berhasil menampilkan data"
+    }
 
-    conn.query(sqlQuery, (err, resQuery) => {
-        if(err){
-            res.send({
-                info: err
-            });
-        } else{
-            response.ok(resQuery, '', res)
-        }
-    });
+    executeQuery(req, res, sqlQuery, data);
 };
 
 exports.getOne = (req, res) => {
-    const userId = req.params.User_Id;
-    let sqlQuery = `SELECT * FROM ${tableName} WHERE User_Id='${userId}'`;
-
-    conn.query(sqlQuery, (err, resQuery) => {
-        var string=JSON.stringify(resQuery);
-        var json =  JSON.parse(string);
-        if(err){
-            res.send({
-                info: err
-            });
-        } else{
-            response.ok(json[0], '', res)
-        }
-    });
-}
-
-//CREATE (INSERT)
-exports.post = (req, res) => {
+    const kodeProduct = req.params.Kode_Product;
+    let sqlQuery = `SELECT * FROM ${tableName} WHERE Kode_Product='${kodeProduct}'`;
     let data = {
-        "User_Id": req.body.User_Id,
-        "email": req.body.email,
-        "Password": md5(req.body.Password),
-        "Levell": req.body.Levell
-    }
-    let sqlQuery = `INSERT INTO ${tableName} SET ?`;
-
-    conn.query(sqlQuery, data, (err, resQuery)=>{
-        if (err){
-            res.send({
-                info: err
-            });
-        }
-        else{
-            response.ok(resQuery, 'Data telah tersimpan', res)
-        }    
-    });
-}
-
-//UPDATE
-exports.put = (req, res) => {
-    const userId = req.params.User_Id;
-    let data = {
-        "Password": req.body.Password,
+        message: "berhasil menampilkan data"
     }
 
-    let sqlQuery = `UPDATE ${tableName} SET ? WHERE User_Id = '${userId}'`;
-    conn.query(sqlQuery, data, (err,resQuery)=>{
-        if (err){
-            res.send({
-                info:err
-            })
-        }
-        else{
-            response.ok(resQuery, 'Data telah terimpan', res)
-        }
-    });
+    executeQuery(req, res, sqlQuery, data);
 }
 
-//DELETE
-exports.delete = (req, res) => {
-    const userId = req.params.User_Id;
-    let sqlQuery = `DELETE FROM ${tableName} WHERE User_Id = '${userId}'`;
-    
-    conn.query(sqlQuery, (err,resQuery)=>{
-        if (err){
-            res.send({
-                info:err
-            })
-        }
-        else{
-            response.ok(resQuery, 'Data telah terhapus', res)
-        }
-    });
+//=========================================================kalo butuh login lain, bisa nambah baru dibawah ini
+
+
+
+//==================================================================================================================
+
+// Fungsi
+function executeQuery(req, res, sqlQuery, data){
+    conn.query(sqlQuery, 
+              (data) ? data.dataInsert : '', 
+              (err, resQuery) => {
+                    if(err){
+                        res.send({
+                            info: err
+                        });
+                    } else{
+                        console.log(resQuery);
+                        response.ok((resQuery == '' ? 'Tidak ada data' : resQuery), (data) ? data.message : '', res);
+                    }
+              });
 }

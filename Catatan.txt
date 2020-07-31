@@ -1,7 +1,3 @@
-PERUBAHAN DATABASE :
-- penjualan_h(status, sumber)
-
-
 {
 	"kode_penjualan": "PJ28072020004",
 	"kode_karyawan":  "KR25092018001",
@@ -38,3 +34,12 @@ PERUBAHAN DATABASE :
 	"jenis": "Langganan",
 	"jumlah_cuci": 0
 }
+
+{
+	"User_Id": "wakwaw",
+	"email": "wakwaw@gmail.com",
+	"Password": "5f4dcc3b5aa765d61d8327deb882cf99",
+	"Levell": "2"
+}
+
+bikin kalo udh 10 kali cuci ada notif di android
