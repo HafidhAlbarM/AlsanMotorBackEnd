@@ -2,7 +2,7 @@ module.exports = function(app){
     const controllerMobil = require('./controllers/c_mobil');
     const controllerUser = require('./controllers/c_user');
     const controllerProduct = require('./controllers/c_product');
-    const controllerTransaksiPenjualan = require("./controllers/c_transaksi_penjualan");
+    const controllerTransaksiPemesanan = require("./controllers/c_transaksi_pemesanan");
 
     //MOBIL
     app.route("/mobil").get(controllerMobil.get);
@@ -23,10 +23,10 @@ module.exports = function(app){
     app.route("/product/:Kode_Product").get(controllerProduct.getOne);
     
     //TRANSAKSI YANG SELSAI
-    app.route("/transaksi_penjualan/:kode_penjualan").get(controllerTransaksiPenjualan.getOne);
-    app.route("/transaksi_penjualan").post(controllerTransaksiPenjualan.post);
-    app.route("/transaksi_penjualan/get-detail/:kode_penjualan").get(controllerTransaksiPenjualan.getDetail);
-    app.route("/transaksi_penjualan/get-one-detail/:kode_penjualan").get(controllerTransaksiPenjualan.getOneDetail);
-    app.route("/transaksi_penjualan/put-detail/:kode_penjualan").get(controllerTransaksiPenjualan.putDetail);
-    app.route("/transaksi_penjualan/delete-detail/:kode_penjualan").get(controllerTransaksiPenjualan.deleteDetail);
+    app.route("/transaksi_pemesanan/:kode_pemesanan").get(controllerTransaksiPemesanan.getOne);
+    app.route("/transaksi_pemesanan").post(controllerTransaksiPemesanan.post);
+    app.route("/transaksi_pemesanan/get-detail/:kode_pemesanan").get(controllerTransaksiPemesanan.getDetail);
+    app.route("/transaksi_pemesanan/get-one-detail/:kode_pemesanan").get(controllerTransaksiPemesanan.getOneDetail);
+    // app.route("/transaksi_pemesanan/put-detail/:kode_pemesanan").get(controllerTransaksiPemesanan.putDetail);
+    // app.route("/transaksi_pemesanan/delete-detail/:kode_pemesanan").get(controllerTransaksiPemesanan.deleteDetail);
 }

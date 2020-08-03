@@ -1,22 +1,22 @@
 {
-	"kode_penjualan": "PJ28072020004",
+	"kode_pemesanan": "PM28072020001",
 	"kode_karyawan":  "KR25092018001",
 	"plat_nomor": "B8872KG",
-	"tanggal_penjualan": "2020-07-28",
+	"tanggal_pemesanan": "2020-07-28",
 	"total_qty": 2,
 	"total": 28000,
 	"status":"BELUM LUNAS",
-	"sumber":"ANDROID"
-	"transaksi_penjualan_detail":[
+	"sumber":"ANDROID",
+	"transaksi_pemesanan_detail":[
 		{
-			"kode_penjualan": "PJ28072020004",
+			"kode_pemesanan": "PM28072020001",
 			"kode_product": "PR21112018SPR003",
             "harga": 4000,
             "qty": 2,
             "sub_total":8000
 		},
 		{
-			"kode_penjualan": "PJ28072020004",
+			"kode_pemesanan": "PM28072020001",
 			"kode_product": "PR26052019SPR009",
             "harga": 10000,
             "qty": 2,
