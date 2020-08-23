@@ -6,7 +6,7 @@ const tableName = "product";
 
 //READ (SELECT)
 exports.get = (req, res) => {
-    let sqlQuery = `SELECT * FROM ${tableName}`;
+    let sqlQuery = `SELECT * FROM ${tableName} WHERE Kode_Kategori <> 'JSA'`;
     let data = {
         message: "berhasil menampilkan data"
     }

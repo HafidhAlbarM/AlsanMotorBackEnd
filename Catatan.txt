@@ -26,6 +26,39 @@
 }
 
 
+
+
+{
+	"kode_pemesanan": "PM05082020002",
+	"kode_karyawan":  "KR05082018001",
+	"plat_nomor": "B2361MF",
+	"tanggal_pemesanan": "2020-08-05",
+	"total_qty": 2,
+	"total": 28000,
+	"status":"BELUM LUNAS",
+	"sumber":"ANDROID",
+	"transaksi_pemesanan_detail":[
+		{
+			"kode_pemesanan": "PM05082020002",
+			"kode_product": "PR26092018ACS001",
+            "harga": 4000000,
+            "qty": 1,
+            "sub_total":4000000
+		},
+		{
+			"kode_pemesanan": "PM05082020002",
+			"kode_product": "PR27012019ACS005",
+            "harga": 250000,
+            "qty": 1,
+            "sub_total": 250000
+		}
+	]
+}
+
+
+
+
+
 {
 	"plat_nomor": "B8872KG",
 	"merk_mobil": "Toyota",

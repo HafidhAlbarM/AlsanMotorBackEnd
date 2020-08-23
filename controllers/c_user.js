@@ -19,7 +19,9 @@ exports.get = (req, res) => {
 
 exports.getOne = (req, res) => {
     const userId = req.params.User_Id;
-    let sqlQuery = `SELECT * FROM ${tableName} WHERE User_Id='${userId}'`;
+    let sqlQuery = `SELECT a.*, b.* FROM ${tableName} a
+    INNER JOIN mobil b on a.User_Id = b.User_Id
+    WHERE a.User_Id='${userId}'`;
     let data = {
         message: "berhasil menampilkan data"
     }
