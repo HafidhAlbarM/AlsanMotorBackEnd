@@ -29,6 +29,59 @@ exports.getOne = (req, res) => {
     executeQuery(req, res, sqlQuery, data);
 }
 
+exports.postOneUserAuth = (req, res) => {
+    const dataUser = {
+        'User_Id': req.body.User_Id,
+        'email': req.body.email,
+        'Password': md5(req.body.Password),
+        "Levell": 3
+    }
+
+    const dataMobil = {
+        'plat_nomor': req.body.plat_nomor,
+        'merk_mobil': req.body.merk_mobil,
+        'nama_mobil': req.body.nama_mobil,
+        'pemilik': req.body.pemilik,
+        'jenis': "Langganan",
+        'jumlah_cuci': 0,
+        "User_Id": req.body.User_Id
+    }
+
+    let sqlQuery = `INSERT INTO ${tableName} SET ?`;
+    conn.query(sqlQuery, dataUser, (err, resQuery)=>{
+        if(err){
+            res.send({
+                info: err
+            })
+        }else{
+            let sqlQuery2 = `INSERT INTO mobil SET ?`;
+            conn.query(sqlQuery2, dataMobil, (err, resQuery)=>{
+                if(err){
+                    res.send({
+                        info: err
+                    })
+                }else{
+                    response.ok(resQuery, 'Registrasi berhasil', res);
+                }
+            });
+        }
+    });
+}
+
+exports.getOneUserAuth = (req, res) => {
+    const userId = req.body.User_Id;
+    const password = md5(req.body.Password);
+    let sqlQuery = `SELECT a.*, b.* FROM ${tableName} a
+    INNER JOIN mobil b on a.User_Id = b.User_Id
+    WHERE a.User_Id='${userId}' and a.Password='${password}'`;
+
+    let data = {
+        message: "berhasil menampilkan data"
+    }
+
+    executeQuery(req, res, sqlQuery, data);
+}
+
 //CREATE (INSERT)
 exports.post = (req, res) => {
     let dataInsert = {
@@ -39,10 +92,9 @@ exports.post = (req, res) => {
     }
     let sqlQuery = `INSERT INTO ${tableName} SET ?`;
 
-    let message = "data telah tersimpan";
     let data = {
         dataInsert: dataInsert,
-        message: message
+        message: "data telah tersimpan"
     }
 
     executeQuery(req, res, sqlQuery, data);

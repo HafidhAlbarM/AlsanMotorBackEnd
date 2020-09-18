@@ -7,7 +7,7 @@ const tableDetailName = "pemesanan_d";
 
 //HEADER
 
-exports.getOne = (req, res) => {
+exports.get = (req, res) => {
     const platNomor = req.params.plat_nomor;
     let sqlQuery = `SELECT * FROM ${tableName} WHERE plat_nomor='${platNomor}' AND status='LUNAS'`;
 
@@ -24,7 +24,8 @@ exports.getOne = (req, res) => {
     });
 }
 
-exports.getOneByKodePemesanan = (req, res) => {
+
+exports.getOne = (req, res) => {
     const kodepemesanan = req.params.kode_pemesanan;
     let sqlQuery = `SELECT * FROM ${tableName} WHERE kode_pemesanan='${kodepemesanan}' AND status='LUNAS'`;
 

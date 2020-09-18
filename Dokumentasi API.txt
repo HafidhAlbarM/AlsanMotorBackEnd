@@ -1,3 +1,51 @@
+Dokumentasi API
+
+------------------------REGISTER------------------------
+POST
+localhost:3000/user/register
+{
+    "User_Id":"penguasa",
+    "email":"penguasaphonty@gmail.com",
+    "Password":"password",
+    "plat_nomor":"B777JR",
+    "merk_mobil":"Honda",
+    "nama_mobil":"Brio",
+    "pemilik":"Penguasa"
+}
+
+------------------------LOGIN------------------------
+POST
+localhost:3000/user/login
+{
+    "User_Id":"brian",
+    "Password":"password"
+}
+
+------------------------PROFILE------------------------
+GET
+localhost:3000/user/brian
+
+
+------------------------PRODUCT------------------------
+
+GET
+localhost:3000/product
+
+GET
+localhost:3000/product/PR19052019ACS007
+
+------------------------PEMESANAN------------------------
+
+GET
+ngambil semua data pemesanan berdasarkan plat_nomor
+localhost:3000/transaksi_pemesanan/B2361MF
+
+GET
+localhost:3000/transaksi_pemesanan_by_kode_pemesanan/PM05082020002
+
+GET
+localhost:3000/transaksi_pemesanan/get_detail/PM05082020002
+
 {
 	"kode_pemesanan": "PM28072020001",
 	"kode_karyawan":  "KR25092018001",
@@ -24,7 +72,6 @@
 		}
 	]
 }
-
 
 
 
@@ -55,24 +102,5 @@
 	]
 }
 
-
-
-
-
-{
-	"plat_nomor": "B8872KG",
-	"merk_mobil": "Toyota",
-	"nama_mobil": "Camry",
-	"pemilik": "Ibnu Sina",
-	"jenis": "Langganan",
-	"jumlah_cuci": 0
-}
-
-{
-	"User_Id": "wakwaw",
-	"email": "wakwaw@gmail.com",
-	"Password": "5f4dcc3b5aa765d61d8327deb882cf99",
-	"Levell": "2"
-}
 
 bikin kalo udh 10 kali cuci ada notif di android
