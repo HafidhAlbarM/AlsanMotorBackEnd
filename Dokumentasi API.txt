@@ -46,25 +46,24 @@ localhost:3000/transaksi_pemesanan_by_kode_pemesanan/PM05082020002
 GET
 localhost:3000/transaksi_pemesanan/get_detail/PM05082020002
 
+POST
+localhost:3000/transaksi_pemesanan
 {
-	"kode_pemesanan": "PM28072020001",
 	"kode_karyawan":  "KR25092018001",
 	"plat_nomor": "B8872KG",
 	"tanggal_pemesanan": "2020-07-28",
-	"total_qty": 2,
+	"total_qty": 4,
 	"total": 28000,
 	"status":"BELUM LUNAS",
 	"sumber":"ANDROID",
 	"transaksi_pemesanan_detail":[
 		{
-			"kode_pemesanan": "PM28072020001",
 			"kode_product": "PR21112018SPR003",
             "harga": 4000,
             "qty": 2,
             "sub_total":8000
 		},
 		{
-			"kode_pemesanan": "PM28072020001",
 			"kode_product": "PR26052019SPR009",
             "harga": 10000,
             "qty": 2,
@@ -76,7 +75,6 @@ localhost:3000/transaksi_pemesanan/get_detail/PM05082020002
 
 
 {
-	"kode_pemesanan": "PM05082020002",
 	"kode_karyawan":  "KR05082018001",
 	"plat_nomor": "B2361MF",
 	"tanggal_pemesanan": "2020-08-05",
@@ -86,14 +84,12 @@ localhost:3000/transaksi_pemesanan/get_detail/PM05082020002
 	"sumber":"ANDROID",
 	"transaksi_pemesanan_detail":[
 		{
-			"kode_pemesanan": "PM05082020002",
 			"kode_product": "PR26092018ACS001",
             "harga": 4000000,
             "qty": 1,
             "sub_total":4000000
 		},
 		{
-			"kode_pemesanan": "PM05082020002",
 			"kode_product": "PR27012019ACS005",
             "harga": 250000,
             "qty": 1,

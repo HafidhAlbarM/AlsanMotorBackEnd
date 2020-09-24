@@ -44,36 +44,73 @@ exports.getOne = (req, res) => {
 
 //CREATE (INSERT)
 exports.post = (req, res) => {
-    let dataHeader = {
-        "kode_pemesanan": req.body.kode_pemesanan,
-        "kode_karyawan": req.body.kode_karyawan,
-        "plat_nomor": req.body.plat_nomor,
-        "tanggal_pemesanan": req.body.tanggal_pemesanan,
-        "total_qty": req.body.total_qty,
-        "total": req.body.total,
-        "status": req.body.status,
-        "sumber": "ANDROID"
-    }
-    let dataDetail = req.body.transaksi_pemesanan_detail;
-    
-    let sqlQuery = `INSERT INTO ${tableName} SET ?`;
-    conn.query(sqlQuery, dataHeader, (err, resQuery)=>{
-        if (err){
+    let sqlQuery = "SELECT pemesanan FROM jumlah";
+    let kodePemesanan = "";
+    let dataHeader = {};
+    conn.query(sqlQuery, (err, resQuery)=>{
+        if(err){
             res.send({
                 info: err
             });
-        }
-        else{
-            dataDetail.forEach(function(data){
-                let sqlQueryDetail = `INSERT INTO ${tableDetailName} SET ?`;
-                conn.query(sqlQueryDetail, data, (errDtl, resQueryDetail)=>{
-                    
-                });
-            });
+        }else{
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
+            var yyyy = today.getFullYear();
+
+            //Generate Kode Pemesanan
+            let maxCode = resQuery[0].pemesanan + 1;
+            kodePemesanan = "PM" + dd + mm + yyyy + ("00000" + maxCode).slice(-3);
+
+            dataHeader = {
+                "kode_pemesanan": kodePemesanan,
+                "kode_karyawan": req.body.kode_karyawan,
+                "plat_nomor": req.body.plat_nomor,
+                "tanggal_pemesanan": req.body.tanggal_pemesanan,
+                "total_qty": req.body.total_qty,
+                "total": req.body.total,
+                "status": req.body.status,
+                "sumber": "ANDROID"
+            }
             
-            response.ok(resQuery, 'Data telah tersimpan, kirimkan nomor pemesanan & bukti transfer ke 085817911180', res);     
-        }    
-    });
+            let dataDetail = req.body.transaksi_pemesanan_detail;
+           
+            for (let key in dataDetail) {
+                dataDetail[key].kode_pemesanan = kodePemesanan;
+            }
+
+            //INSERT HEADER
+            sqlQuery = `INSERT INTO ${tableName} SET ?`;
+            conn.query(sqlQuery, dataHeader, (err, resQuery)=>{
+                if (err){
+                    res.send({
+                        info: err
+                    });
+                }
+                else{
+                    //INSERT DETAIL
+                    dataDetail.forEach(function(data){
+                        let sqlQueryDetail = `INSERT INTO ${tableDetailName} SET ?`;
+                        conn.query(sqlQueryDetail, data, (errDtl, resQueryDetail)=>{
+                            
+                        });
+                    });
+                    
+                    //UPDATE JUMLAH PEMESANAN
+                    sqlQuery = "UPDATE jumlah set pemesanan = pemesanan+1";
+                    conn.query(sqlQuery, (err, resQuery)=>{
+                        if(err){
+                            res.send({
+                                info: err
+                            });
+                        }else{
+                            response.ok(resQuery, 'Data telah tersimpan, kirimkan nomor pemesanan & bukti transfer ke 085817911180', res);
+                        }
+                    });          
+                }    
+            });
+        }
+    }); 
 }
 
 
