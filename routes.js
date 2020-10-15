@@ -9,7 +9,7 @@ module.exports = function(app){
     app.route("/user/register/").post(validator.postOneUserAuth, controllerUser.postOneUserAuth);
 
     //LOGIN
-    app.route("/user/login/").post(controllerUser.getOneUserAuth);
+    app.route("/user/login/").post(validator.getOneUserAuth, controllerUser.getOneUserAuth);
     
     //PROFILE
     app.route("/user/:User_Id").get(controllerUser.getOne);

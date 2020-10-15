@@ -11,18 +11,12 @@ exports.get = (req, res) => {
     const platNomor = req.params.plat_nomor;
     let sqlQuery = `SELECT * FROM ${tableName} WHERE plat_nomor='${platNomor}' AND status='LUNAS'`;
 
-    conn.query(sqlQuery, (err, resQuery) => {
-        var string=JSON.stringify(resQuery);
-        var json =  JSON.parse(string);
-        if(err){
-            res.send({
-                info: err
-            });
-        } else{
-            response.ok(json[0], '', res)
-        }
-    });
-}
+    let data = {
+        message: "berhasil menampilkan data"
+    }
+
+    executeQuery(req, res, sqlQuery, data);
+};
 
 
 exports.getOne = (req, res) => {
@@ -136,4 +130,20 @@ exports.getDetail = (req, res) => {
             response.ok(resQuery, '', res)
         }
     });
+}
+
+// Fungsi
+function executeQuery(req, res, sqlQuery, data){
+    conn.query(sqlQuery, 
+              (data) ? data.dataInsert : '', 
+              (err, resQuery) => {
+                    if(err){
+                        res.send({
+                            info: err
+                        });
+                    } else{
+                        console.log(resQuery);
+                        response.ok((resQuery == '' ? 'Tidak ada data' : resQuery), (data) ? data.message : '', res);
+                    }
+              });
 }
