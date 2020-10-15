@@ -3,8 +3,10 @@ module.exports = function(app){
     const controllerProduct = require('./controllers/c_product');
     const controllerTransaksiPemesanan = require("./controllers/c_transaksi_pemesanan");
 
+    const validator = require('./validator');
+
     //REGISTER
-    app.route("/user/register/").post(controllerUser.postOneUserAuth);
+    app.route("/user/register/").post(validator.postOneUserAuth, controllerUser.postOneUserAuth);
 
     //LOGIN
     app.route("/user/login/").post(controllerUser.getOneUserAuth);
