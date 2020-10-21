@@ -6,7 +6,7 @@ module.exports = function(app){
     const validator = require('./validator');
 
     //REGISTER
-    app.route("/user/register/").post(validator.postOneUserAuth, controllerUser.postOneUserAuth);
+    app.route("/user/register/").post(validator.postOneUserAuth,controllerUser.postOneUserAuth);
 
     //LOGIN
     app.route("/user/login/").post(validator.getOneUserAuth, controllerUser.getOneUserAuth);
