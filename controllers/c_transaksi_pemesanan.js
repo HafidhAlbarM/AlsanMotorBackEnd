@@ -1,5 +1,6 @@
 const conn = require('../config/conn');
 const response = require('../config/res');
+const nodemailer = require('nodemailer');
 
 const tableName = "pemesanan_h";
 const tableDetailName = "pemesanan_d";
@@ -32,6 +33,32 @@ exports.getOne = (req, res) => {
             });
         } else{
             response.ok(json[0], '', res)
+        }
+    });
+}
+
+const sendEmail = (dataReq, next) => {
+    const transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PASSWORD
+        }
+    });
+
+    const mailOptions = {
+        from: process.env.EMAIL,
+        to: 'penguasaphonty@gmail.com',
+        subject: 'PEMESANAN SUKSES | Alsan Motor',
+        text: `Pemesanan berhasil, silahkan transfer dana sebesar Rp.${dataReq.total} ke Account BNI 7660414929 untuk penyeleaian pembayaran`
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+        if(error){
+            console.log(error);
+        }else{
+            console.log('Email sent ' + info.response);
+            next();
         }
     });
 }
@@ -98,7 +125,9 @@ exports.post = (req, res) => {
                                 info: err
                             });
                         }else{
-                            response.ok(resQuery, 'Data telah tersimpan, kirimkan nomor pemesanan & bukti transfer ke 085817911180', res);
+                            sendEmail(req.body, () => {
+                                response.ok(resQuery, 'Data telah tersimpan', res)
+                            })
                         }
                     });          
                 }    
