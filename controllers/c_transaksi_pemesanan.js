@@ -9,7 +9,7 @@ const tableDetailName = "pemesanan_d";
 
 exports.get = (req, res) => {
     const platNomor = req.params.plat_nomor;
-    let sqlQuery = `SELECT * FROM ${tableName} WHERE plat_nomor='${platNomor}' AND status='LUNAS'`;
+    let sqlQuery = `SELECT * FROM ${tableName} WHERE plat_nomor='${platNomor}'`;
 
     let data = {
         message: "berhasil menampilkan data"
@@ -117,7 +117,9 @@ exports.post = (req, res) => {
 
 exports.getDetail = (req, res) => {
     const kodepemesanan = req.params.kode_pemesanan;
-    let sqlQuery = `SELECT * FROM ${tableDetailName} WHERE kode_pemesanan='${kodepemesanan}'`;
+    let sqlQuery = `SELECT a.*, b.Nama_Product FROM ${tableDetailName} a
+                    LEFT JOIN product b on a.kode_product = b.Kode_Product
+                    WHERE kode_pemesanan='${kodepemesanan}'`;
 
     conn.query(sqlQuery, (err, resQuery) => {
         // var string=JSON.stringify(resQuery);
