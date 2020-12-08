@@ -1,6 +1,7 @@
 const conn = require('../config/conn');
 const response = require('../config/res');
 const nodemailer = require('nodemailer');
+const func = require('../config/function');
 
 const tableName = "pemesanan_h";
 const tableDetailName = "pemesanan_d";
@@ -11,7 +12,7 @@ const tableDetailName = "pemesanan_d";
 exports.get = (req, res) => {
     const platNomor = req.params.plat_nomor;
     let sqlQuery = `SELECT * FROM ${tableName} WHERE plat_nomor='${platNomor}'`;
-
+    
     let data = {
         message: "berhasil menampilkan data"
     }
@@ -47,10 +48,19 @@ const sendEmail = (dataReq, next) => {
     });
 
     const mailOptions = {
-        from: process.env.EMAIL,
-        to: 'penguasaphonty@gmail.com',
+        from: 'ALSAN MOTOR',
+        to: dataReq.email,
         subject: 'PEMESANAN SUKSES | Alsan Motor',
-        text: `Pemesanan berhasil, silahkan transfer dana sebesar Rp.${dataReq.total} ke Account BNI 7660414929 untuk penyeleaian pembayaran`
+        html: `<html>
+                <head></head>
+                <body>
+                    <h1>PEMESANAN BERHASIL</h1>
+                    <p>Pemesanan berhasil, silahkan transfer dana sebesar ${func.currencyFormat(dataReq.total)} ke</p>
+                    <p>Account BNI <b>7660414929</b></p>
+                    <p>untuk pelunasan pembayaran</p><br><br>
+                    <p><i>Terimakasi telah berbelanja di Alsan Motor</i></p>
+                </body>
+               </html>`
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
@@ -126,7 +136,7 @@ exports.post = (req, res) => {
                             });
                         }else{
                             sendEmail(req.body, () => {
-                                response.ok(resQuery, 'Data telah tersimpan', res)
+                                response.ok(resQuery, 'Your Order is placed, please check your email', res)
                             })
                         }
                     });          

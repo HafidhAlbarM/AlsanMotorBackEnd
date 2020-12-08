@@ -65,6 +65,7 @@ exports.postOneUserAuth = (req, res) => {
                                 'merk_mobil': req.body.merk_mobil,
                                 'nama_mobil': req.body.nama_mobil,
                                 'pemilik': req.body.pemilik,
+                                'alamat': req.body.alamat,
                                 'jenis': "Langganan",
                                 'jumlah_cuci': 0,
                                 "User_Id": req.body.User_Id
