@@ -1,5 +1,4 @@
 const express = require('express');
-const PORT = 3000;
 const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const dotenv = require('dotenv');
@@ -13,6 +12,12 @@ dotenv.config()
 
 var routes = require('./routes');
 routes(app);
+
+
+const PORT = process.env.port;
+if(PORT == null || PORT == ''){
+    PORT = 3000;
+}
 
 app.listen(PORT, (err)=>{
     console.log('berjalan di port ' + PORT);
