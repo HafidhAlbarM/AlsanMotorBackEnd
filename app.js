@@ -14,7 +14,7 @@ var routes = require('./routes');
 routes(app);
 
 
-const PORT = process.env.port;
+let PORT = process.env.PORT;
 if(PORT == null || PORT == ''){
     PORT = 3000;
 }
