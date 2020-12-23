@@ -42,6 +42,7 @@ const sendEmail = (dataReq, next) => {
     const transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
+            type: "OAuth2",
             user: process.env.EMAIL,
             pass: process.env.EMAIL_PASSWORD
         }
