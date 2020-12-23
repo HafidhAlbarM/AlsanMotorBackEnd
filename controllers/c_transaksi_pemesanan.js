@@ -40,7 +40,6 @@ exports.getOne = (req, res) => {
 
 const sendEmail = (dataReq, next) => {
     const transporter = nodemailer.createTransport({
-        service: 'Gmail',
         host: 'smtp.gmail.com',
         port: 465,
         secure: true,
