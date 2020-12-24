@@ -60,6 +60,9 @@ const sendEmail = (dataReq, next) => {
                 <head></head>
                 <body>
                     <h1>PEMESANAN BERHASIL</h1>
+
+                    ${JSON.stringify(transaksi_pemesanan_detail)}
+
                     <p>Pemesanan berhasil, silahkan transfer dana sebesar ${func.currencyFormat(dataReq.total)} ke</p>
                     <p>Account BNI <b>7660414929</b></p>
                     <p>untuk pelunasan pembayaran</p><br><br>
