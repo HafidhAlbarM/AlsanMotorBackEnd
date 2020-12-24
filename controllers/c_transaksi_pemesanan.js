@@ -38,7 +38,7 @@ exports.getOne = (req, res) => {
     });
 }
 
-const sendEmail = (dataReq, next) => {
+const sendEmail = (kodePemesanan, dataReq, next) => {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         // service: 'gmail',
@@ -60,9 +60,8 @@ const sendEmail = (dataReq, next) => {
                 <head></head>
                 <body>
                     <h1>PEMESANAN BERHASIL</h1>
-
-                    ${JSON.stringify(dataReq.transaksi_pemesanan_detail)}
-
+                    <p>Berikut adalah nomor pemesanan Anda:</p>
+                    <p>${kodePemesanan}</p>
                     <p>Pemesanan berhasil, silahkan transfer dana sebesar ${func.currencyFormat(dataReq.total)} ke</p>
                     <p>Account BNI <b>7660414929</b></p>
                     <p>untuk pelunasan pembayaran</p><br><br>
@@ -143,7 +142,7 @@ exports.post = (req, res) => {
                                 info: err
                             });
                         }else{
-                            sendEmail(req.body, () => {
+                            sendEmail(kodePemesanan, req.body, () => {
                                 response.ok(resQuery, 'Your Order is placed, please check your email', res)
                             })
                         }
